@@ -34,10 +34,7 @@ function App() {
     const response = await fetch(`${url}/items`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        listItem: listItemWithoutId,
-        completed: list[list.length - 1].completed,
-      }),
+      body: JSON.stringify({ listItem: listItemWithoutId }),
     });
 
     if (!response.ok) {
@@ -51,6 +48,15 @@ function App() {
     setList((previous) => [...previous, listItemWithId]);
   }
 
+  async function updateList(listItem, Completed){
+    const response = await fetch(`${url}/items`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ listItem: listItem, completed: Completed }),
+    });
+    return response
+  } 
+
   function clearList() {
     //This function clears all the items that have been added to the list.
     const clearedList = [];
@@ -60,9 +66,13 @@ function App() {
   function tickItem(idOfTickedItem) {
     setList((previous) => {
       return previous.map((item) => {
-        return item.id !== idOfTickedItem
-          ? item
-          : { ...item, completed: !item.completed };
+        if(item.id !== idOfTickedItem){
+          updateList(item)
+          return item
+        }else{
+          updateList({ ...item, completed: !item.completed })
+          return { ...item, completed: !item.completed };
+        }
       });
     });
   }
