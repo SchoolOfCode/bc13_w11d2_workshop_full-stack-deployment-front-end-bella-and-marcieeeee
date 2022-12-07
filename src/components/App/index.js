@@ -67,14 +67,13 @@ function App() {
 
   async function handleChange(event){
     let response;
-
     if (event.target.value === 'all'){
        response = await fetch(`${url}/items`);
    } else {
      response = await fetch(`${url}/items?completed=${event.target.value}`);}
     
    const data = await response.json(response);
-    console.log(event.target.value);
+    //console.log(event.target.value);
     setList(data.payload);
     
   }

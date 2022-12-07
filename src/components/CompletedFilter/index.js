@@ -1,10 +1,11 @@
+import './index.css'
 
 export default function CompletedFilter({handleChange}){
 
     return (
 <select onChange={handleChange}>
-    <option value='all'>all</option>
-    <option value='true' >completed</option>
-    <option value='false'>to complete</option>
+    <option value='all'>All</option>
+    <option value='true' >Completed</option>
+    <option value='false'>Uncomplete</option>
 </select>
     )};

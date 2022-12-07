@@ -1,0 +1,16 @@
+select{
+    height: 75px;
+    margin-top: 50px;
+    margin-bottom: 10px;
+    background-image: linear-gradient(rgb(143, 205, 225), rgb(85, 189, 224));
+    border-radius: 10px;
+    padding-left: 30px;
+    font-size: 25px;
+    border-width: 2px;
+    border-color: black;
+   font-weight: bold;
+}
+
+select:hover{
+    background-image: linear-gradient(rgb(85, 189, 224), rgb(145, 205, 225));
+}
