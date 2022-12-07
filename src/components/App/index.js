@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import InputList from "../InputList";
 import ShowList from "../ShowList";
 import ClearList from "../ClearList";
+import CompletedFilter from "../CompletedFilter";
 
 /* 1. App will contain components which will allow a person to input items into a list, show the items that are in the list, 
 and clear all of the items in a list. 
@@ -18,11 +19,12 @@ function App() {
     async function getShoppingList() {
       const response = await fetch(`${url}/items`);
       const data = await response.json(response);
-      console.log(data);
+      //console.log(data);
       setList(data.payload);
     }
     getShoppingList();
   }, []);
+
 
   async function addToList(newListItem) {
     //This function changes the state of the list by pushing the text from the input field in to the array.
@@ -54,6 +56,20 @@ function App() {
     setList(clearedList);
   }
 
+  async function handleChange(event){
+    let response;
+
+    if (event.target.value === 'all'){
+       response = await fetch(`${url}/items`);
+   } else {
+     response = await fetch(`${url}/items?completed=${event.target.value}`);}
+    
+   const data = await response.json(response);
+    console.log(event.target.value);
+    setList(data.payload);
+    
+  }
+
   function tickItem(idOfTickedItem) {
     setList((previous) => {
       return previous.map((item) => {
@@ -66,7 +82,9 @@ function App() {
 
   return (
     <section>
+
       <InputList addToList={addToList} buttonText={"Add To List"} />
+      <CompletedFilter handleChange={handleChange} />
       <ShowList list={list} tickItem={tickItem} />
       <ClearList clearList={clearList} buttonText={"Clear List"} />
     </section>
