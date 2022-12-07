@@ -9,3 +9,7 @@
 .tickedItem:hover{
   cursor: pointer;
 }
+
+.untickedItem{
+  cursor: pointer;
+}
