@@ -5,3 +5,7 @@
 .untickedItem {
   font-weight: bold;
 }
+
+.tickedItem:hover{
+  cursor: pointer;
+}
